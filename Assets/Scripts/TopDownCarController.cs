@@ -1,15 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TopDownCarController : MonoBehaviour
 {
     [Header("Car settings")]
-    float driftFactor = 0f;
-    float accelerationFactor = 30.0f;
+    float accelerationFactor = 20.0f;
     float turnFactor = 2.5f;
     public float maxSpeed = 7.5f;
-    public float slowDownFactor = 10f;
+    float slowDownFactor = 10f;
 
     //Local variables
     public float accelerationInput = 0;
@@ -21,13 +18,11 @@ public class TopDownCarController : MonoBehaviour
 
     //Components
     Rigidbody2D carRigidbody2D;
-    Collider2D carCollider;
 
     //Awake is called when the script instance is being loaded.
     void Awake()
     {
         carRigidbody2D = GetComponent<Rigidbody2D>();
-        carCollider = GetComponentInChildren<Collider2D>();
     }
 
     void Start()
@@ -57,11 +52,15 @@ public class TopDownCarController : MonoBehaviour
 
         //Limit so we cannot go faster than the max speed in the "forward" direction
         if (velocityVsUp > maxSpeed && accelerationInput > 0)
+        {
+            carRigidbody2D.drag = Mathf.Lerp(carRigidbody2D.drag, slowDownFactor, Time.fixedDeltaTime * 3);
             return;
+        }
 
-        //Limit so we cannot go faster than the 50% of max speed in the "reverse" direction
-        if (velocityVsUp < -maxSpeed * 0.5f && accelerationInput < 0)
-            return;
+        if (maxSpeed == 0)
+        {
+            carRigidbody2D.drag = Mathf.Lerp(carRigidbody2D.drag, slowDownFactor, Time.fixedDeltaTime * 3);
+        }
 
         //Limit so we cannot go faster in any direction while accelerating
         if (carRigidbody2D.velocity.sqrMagnitude > maxSpeed * maxSpeed && accelerationInput > 0)
@@ -91,20 +90,26 @@ public class TopDownCarController : MonoBehaviour
     {
         //Get forward and right velocity of the car
         Vector2 forwardVelocity = transform.up * Vector2.Dot(carRigidbody2D.velocity, transform.up);
-        Vector2 rightVelocity = transform.right * Vector2.Dot(carRigidbody2D.velocity, transform.right);
 
-        //Kill the orthogonal velocity (side velocity) based on how much the car should drift. 
-        carRigidbody2D.velocity = forwardVelocity + rightVelocity * driftFactor;
+        carRigidbody2D.velocity = forwardVelocity;
     }
 
     public void SetInputVector(Vector2 inputVector)
     {
         steeringInput = inputVector.x;
-        accelerationInput = inputVector.y;
+        if (maxSpeed > 0)
+            accelerationInput = inputVector.y;
+        else
+            accelerationInput = 0;
     }
 
     public float GetVelocityMagnitude()
     {
         return carRigidbody2D.velocity.magnitude;
+    }
+
+    public void SetAccelerationFactor(float factor)
+    {
+        accelerationFactor = factor;
     }
 }

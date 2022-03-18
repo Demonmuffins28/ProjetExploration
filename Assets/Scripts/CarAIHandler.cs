@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Linq;
 
 public class CarAIHandler : MonoBehaviour
 {
     [Header("AI settings")]
-    float maxSpeed = 7.5f;
+    float maxSpeed;
     [Range(0.0f, 1.0f)]
     float skillLevel = 1.0f;
 
@@ -28,7 +26,6 @@ public class CarAIHandler : MonoBehaviour
     Vector2 inputVector;
 
     //Waypoints
-    WaypointNode previousWaypoint = null;
     WaypointNode[] allWayPoints;
 
     //Components
@@ -40,7 +37,8 @@ public class CarAIHandler : MonoBehaviour
         topDownCarController = GetComponent<TopDownCarController>();
         allWayPoints = FindObjectsOfType<WaypointNode>();
 
-        orignalMaximumSpeed = maxSpeed;
+        orignalMaximumSpeed = topDownCarController.maxSpeed;
+        maxSpeed = orignalMaximumSpeed;
     }
 
     // Start is called before the first frame update
@@ -52,7 +50,6 @@ public class CarAIHandler : MonoBehaviour
         if (currentWaypoint == null)
         {
             currentWaypoint = FindClosestWayPoint();
-            previousWaypoint = currentWaypoint;
         }
     }
 
@@ -77,6 +74,7 @@ public class CarAIHandler : MonoBehaviour
         {
             //Send the input to the car controller.
             topDownCarController.SetInputVector(new Vector2(0,0));
+            maxSpeed = 0;
         }
       
     }
@@ -102,13 +100,6 @@ public class CarAIHandler : MonoBehaviour
             //Check if we are close enough to consider that we have reached the waypoint
             if (distanceToWayPoint <= currentWaypoint.minDistanceToReachWaypoint)
             {
-                if (currentWaypoint.maxSpeed > 0)
-                    SetMaxSpeedBasedOnSkillLevel(currentWaypoint.maxSpeed);
-                else SetMaxSpeedBasedOnSkillLevel(1000);
-
-                //Store the current waypoint as previous before we assign a new current one.
-                previousWaypoint = currentWaypoint;
-
                 //If we are close enough then follow to the next waypoint, if there are multiple waypoints then pick one at random.
                 currentWaypoint = currentWaypoint.nextWaypointNode[Random.Range(0, currentWaypoint.nextWaypointNode.Length)];
             }
@@ -140,11 +131,11 @@ public class CarAIHandler : MonoBehaviour
                 Debug.DrawLine(sensorStartPos, hit.point, Color.red);
                 //Debug.Log(transform.name +  "Target Name : " + hit.transform.name + "Target speed : " + hit.transform.GetComponent<Rigidbody2D>().velocity.x);
                 hitdist = hit.distance;
-                if (hit.distance < 3f)
-                {
+                if (hit.distance < 5f && hit.distance > 3f)
                     maxSpeed = Mathf.Abs(hit.transform.GetComponent<Rigidbody2D>().velocity.x);
+                else if (hit.distance < 3f)
+                {
                     topDownCarController.maxSpeed = maxSpeed < 2f ? 0 : maxSpeed;
-                    topDownCarController.accelerationInput = 0f;
                 }
                 else
                 {
@@ -165,12 +156,6 @@ public class CarAIHandler : MonoBehaviour
         Vector2 vectorToTarget = targetPosition - transform.position;
         vectorToTarget.Normalize();
 
-        //Apply avoidance to steering
-        //if (isAvoidingCars)
-        //  AvoidCars(vectorToTarget, out vectorToTarget);
-
-        
-
         //Calculate an angle towards the target 
         angleToTarget = Vector2.SignedAngle(transform.up, vectorToTarget);
         angleToTarget *= -1;
@@ -186,10 +171,6 @@ public class CarAIHandler : MonoBehaviour
 
     float ApplyThrottleOrBrake(float inputX)
     {
-        //If we are going too fast then do not accelerate further. 
-        //if (topDownCarController.GetVelocityMagnitude() > maxSpeed)
-         //   return 0;
-
         //Apply throttle forward based on how much the car wants to turn. If it's a sharp turn this will cause the car to apply less speed forward. We store this as reduceSpeedDueToCornering so we can use it togehter with the skill level
         float reduceSpeedDueToCornering = Mathf.Abs(inputX) / 1.0f;
 
@@ -210,6 +191,6 @@ public class CarAIHandler : MonoBehaviour
 
     public void SetMakeItStop(bool stop)
     {
-        this.makeItStop = stop;
+        makeItStop = stop;
     }
 }

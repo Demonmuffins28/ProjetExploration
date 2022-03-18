@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class OE_Intersection : MonoBehaviour
 {
@@ -20,14 +18,17 @@ public class OE_Intersection : MonoBehaviour
         EOT = GameObject.Find("EOT");
         EOTRight = GameObject.Find("EOTRight");
         Fabrique = GameObject.Find("Fabrique");
+    }
 
+    private void Start()
+    {
         OEB.SetActive(false);
         OET.SetActive(false);
         EOB.SetActive(false);
         EOT.SetActive(false);
         EOTRight.SetActive(false);
     }
-    
+
     private void Update()
     {
         if (timer > 25)
@@ -42,33 +43,58 @@ public class OE_Intersection : MonoBehaviour
         {
             switch (cycle)
             {
+                // turn left OE
                 case 1:
-                    OETLeft.SetActive(false);
                     EOB.SetActive(true);
                     EOT.SetActive(true);
                     EOTRight.SetActive(true);
+                    Invoke("Case3", 1.0f);
                     break;
+                // Frabrique go
                 case 2:
                     OEB.SetActive(true);
                     OET.SetActive(true);
                     OETLeft.SetActive(true);
-                    Fabrique.SetActive(false);
+                    Invoke("Case3", 1.0f);
                     break;
+                // SaintJean go
                 case 3:
                     Fabrique.SetActive(true);
-                    Saint_Jean.SetActive(false);
+                    Invoke("Case3", 1.0f);
                     break;
+                // OE & EO go
                 case 4:
                     Saint_Jean.SetActive(true);
-                    OEB.SetActive(false);
-                    OET.SetActive(false);
-                    EOB.SetActive(false);
-                    EOT.SetActive(false);
-                    EOTRight.SetActive(false);
+                    OETLeft.SetActive(true);
+                    Invoke("Case3", 1.0f);
                     break;
             }
 
             cycle++;
         }
+    }
+
+    private void Case1()
+    {
+        OETLeft.SetActive(false);
+    }
+
+    private void Case2()
+    {
+        Fabrique.SetActive(false);
+    }
+
+    private void Case3()
+    {
+        Saint_Jean.SetActive(false);
+    }
+
+    private void Case4()
+    {
+        OEB.SetActive(false);
+        OET.SetActive(false);
+        EOB.SetActive(false);
+        EOT.SetActive(false);
+        EOTRight.SetActive(false);
     }
 }
