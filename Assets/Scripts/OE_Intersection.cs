@@ -48,14 +48,14 @@ public class OE_Intersection : MonoBehaviour
                     EOB.SetActive(true);
                     EOT.SetActive(true);
                     EOTRight.SetActive(true);
-                    Invoke("Case3", 1.0f);
+                    Invoke("Case1", 1.0f);
                     break;
                 // Frabrique go
                 case 2:
                     OEB.SetActive(true);
                     OET.SetActive(true);
                     OETLeft.SetActive(true);
-                    Invoke("Case3", 1.0f);
+                    Invoke("Case2", 1.0f);
                     break;
                 // SaintJean go
                 case 3:
@@ -66,7 +66,7 @@ public class OE_Intersection : MonoBehaviour
                 case 4:
                     Saint_Jean.SetActive(true);
                     OETLeft.SetActive(true);
-                    Invoke("Case3", 1.0f);
+                    Invoke("Case4", 1.0f);
                     break;
             }
 
