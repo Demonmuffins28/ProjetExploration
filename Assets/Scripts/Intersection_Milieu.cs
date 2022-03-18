@@ -48,29 +48,44 @@ public class Intersection_Milieu : MonoBehaviour
                     OEB.SetActive(true);
                     OET.SetActive(true);
                     OEBRight.SetActive(true);
-                    EOBLeft.SetActive(false);
+                    Invoke("Case1", 1.0f);
                     break;
                 // St-Henri go
                 case 2:
                     EOB.SetActive(true);
                     EOT.SetActive(true);
                     EOBLeft.SetActive(true);
-                    SH_Left.SetActive(false);
-                    SH_Right.SetActive(false);
+                    Invoke("Case2", 1.0f);
                     break;
                 // A20 go
                 case 3:
-                    OEB.SetActive(false);
-                    OET.SetActive(false);
-                    EOB.SetActive(false);
-                    EOT.SetActive(false);
-                    OEBRight.SetActive(false);
                     SH_Left.SetActive(true);
                     SH_Right.SetActive(true);
+                    Invoke("Case3", 1.0f);
                     break;
             }
 
             cycle++;
         }
+    }
+
+    private void Case1()
+    {
+        EOBLeft.SetActive(false);
+    }
+
+    private void Case2()
+    {
+        SH_Left.SetActive(false);
+        SH_Right.SetActive(false);
+    }
+
+    private void Case3()
+    {
+        OEB.SetActive(false);
+        OET.SetActive(false);
+        EOB.SetActive(false);
+        EOT.SetActive(false);
+        OEBRight.SetActive(false);
     }
 }
