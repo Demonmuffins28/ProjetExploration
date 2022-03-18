@@ -131,9 +131,9 @@ public class CarAIHandler : MonoBehaviour
                 Debug.DrawLine(sensorStartPos, hit.point, Color.red);
                 //Debug.Log(transform.name +  "Target Name : " + hit.transform.name + "Target speed : " + hit.transform.GetComponent<Rigidbody2D>().velocity.x);
                 hitdist = hit.distance;
-                if (hit.distance < 5f && hit.distance > 3f)
+                if (hit.distance < 5f && hit.distance > 2f)
                     maxSpeed = Mathf.Abs(hit.transform.GetComponent<Rigidbody2D>().velocity.x);
-                else if (hit.distance < 3f)
+                else if (hit.distance < 2f)
                 {
                     topDownCarController.maxSpeed = maxSpeed < 2f ? 0 : maxSpeed;
                 }
