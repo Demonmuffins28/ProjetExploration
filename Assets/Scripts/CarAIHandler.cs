@@ -15,6 +15,9 @@ public class CarAIHandler : MonoBehaviour
     Vector2 frontSensorPos = new Vector2(0, 1.5f);
     public float hitdist;
 
+    [Header("Car LifeTime")]
+    public float carLifetime = 0f;
+
     //Local variables
     Vector3 targetPosition = Vector3.zero;
     public float orignalMaximumSpeed = 0;
@@ -76,7 +79,8 @@ public class CarAIHandler : MonoBehaviour
             topDownCarController.SetInputVector(new Vector2(0,0));
             maxSpeed = 0;
         }
-      
+
+        carLifetime += Time.deltaTime;
     }
 
     //AI follows waypoints

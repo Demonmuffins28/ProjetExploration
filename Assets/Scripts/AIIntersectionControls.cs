@@ -57,4 +57,62 @@ public class AIIntersectionControls : MonoBehaviour
     {
         Fab.SetActive(e);
     }
+
+    // Action 1
+    public void TurnLeftOE(float delay)
+    {
+        EOB.SetActive(true);
+        EOT.SetActive(true);
+        EOTRight.SetActive(true);
+        Invoke("Case1", delay);
+    }
+
+    // Action 2
+    public void Fabrique(float delay)
+    {
+        OEB.SetActive(true);
+        OET.SetActive(true);
+        OETLeft.SetActive(true);
+        Invoke("Case2", delay);
+    }
+
+    // Action 3
+    public void SaintJean(float delay)
+    {
+        Fab.SetActive(true);
+        Invoke("Case3", delay);
+    }
+
+    // Action 4
+    public void OEAndOE(float delay)
+    {
+        SJ.SetActive(true);
+        OETLeft.SetActive(true);
+        Invoke("Case4", delay);
+    }
+
+    private void Case1()
+    {
+        OETLeft.SetActive(false);
+    }
+
+    private void Case2()
+    {
+        Fab.SetActive(false);
+    }
+
+    private void Case3()
+    {
+        SJ.SetActive(false);
+    }
+
+    private void Case4()
+    {
+        OEB.SetActive(false);
+        OET.SetActive(false);
+        EOB.SetActive(false);
+        EOT.SetActive(false);
+        EOTRight.SetActive(false);
+    }
+
 }

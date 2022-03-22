@@ -40,24 +40,24 @@ public class SpawnCars : MonoBehaviour
 
     private IEnumerator CarGenerator()
     {
+        GameObject TrainingArea = GameObject.Find("TrainingArea");
+
         while (true)
         {
             int randPos1 = Random.Range(0, tabSpawnPos.Length);
-            int randPos2 = Random.Range(0, tabSpawnPos.Length);
             if (randPos1 is 2 or 5 or 8)
             {
-                if (randPos1 == randPos2)
-                {
-                    Vector2 randV1Pos = tabSpawnPos[randPos1];
-                    Instantiate(AICar, randV1Pos, Quaternion.Euler(0f, 0f, rotAngle[randPos1]));
-                    yield return new WaitForSeconds(Mathf.Lerp(0.6f, 2f, Random.value));
-                }
+                randPos1 = Random.Range(0, tabSpawnPos.Length);
+
+                Vector2 randV1Pos = tabSpawnPos[randPos1];
+                Instantiate(AICar, randV1Pos, Quaternion.Euler(0f, 0f, rotAngle[randPos1]), TrainingArea.transform);
+                yield return new WaitForSeconds(Mathf.Lerp(0.5f, 1.5f, Random.value));
             }
             else
             {
                 Vector2 randV2Pos = tabSpawnPos[randPos1];
-                Instantiate(AICar, randV2Pos, Quaternion.Euler(0f, 0f, rotAngle[randPos1]));
-                yield return new WaitForSeconds(Mathf.Lerp(0.6f, 2f, Random.value));
+                Instantiate(AICar, randV2Pos, Quaternion.Euler(0f, 0f, rotAngle[randPos1]), TrainingArea.transform);
+                yield return new WaitForSeconds(Mathf.Lerp(0.5f, 1.5f, Random.value));
             }              
         }
     }
