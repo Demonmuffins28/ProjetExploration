@@ -111,5 +111,7 @@ public class IntersectionAgent : Agent
             SetReward(1 / totalCarTimer);
             EndEpisode();
         }
+
+        Debug.Log(1 / totalCarTimer);
     }
 }
