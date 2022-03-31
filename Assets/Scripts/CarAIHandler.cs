@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Linq;
+using System.Collections.Generic;
 
 public class CarAIHandler : MonoBehaviour
 {
@@ -13,7 +14,11 @@ public class CarAIHandler : MonoBehaviour
     [Header("Sensors")]
     float sensorLength = 6f;
     Vector2 frontSensorPos = new Vector2(0, 1.5f);
-    public float hitdist;
+
+    [Header("Car LifeTime")]
+    public float carLifetime = 0f;
+    public float timeStopped = 0f;
+    private bool carHasStopped = false;
 
     //Local variables
     Vector3 targetPosition = Vector3.zero;
@@ -30,12 +35,14 @@ public class CarAIHandler : MonoBehaviour
 
     //Components
     TopDownCarController topDownCarController;
+    IntersectionAgent agent;
 
     //Awake is called when the script instance is being loaded.
     void Awake()
     {
         topDownCarController = GetComponent<TopDownCarController>();
         allWayPoints = FindObjectsOfType<WaypointNode>();
+        agent = FindObjectOfType<IntersectionAgent>();
 
         orignalMaximumSpeed = topDownCarController.maxSpeed;
         maxSpeed = orignalMaximumSpeed;
@@ -76,21 +83,33 @@ public class CarAIHandler : MonoBehaviour
             topDownCarController.SetInputVector(new Vector2(0,0));
             maxSpeed = 0;
         }
+
+        carLifetime += Time.deltaTime;
+
+        if (topDownCarController.maxSpeed < 1f || topDownCarController.accelerationInput <= 0.1f)
+        {
+            timeStopped += Time.deltaTime;
+            carHasStopped = true;
+        }
       
     }
 
     //AI follows waypoints
-    void FollowWaypoints()
+    private void FollowWaypoints()
     {
-        if (currentWaypoint == null) 
+        if (currentWaypoint == null)
+        {
             Destroy(gameObject);
+        }
 
         //Set the target on the waypoints position
         if (currentWaypoint != null)
         {
             if (currentWaypoint.nextWaypointNode.Length == 0)
+            {
                 Destroy(gameObject);
-
+            }
+                
             //Set the target position of for the AI. 
             targetPosition = currentWaypoint.transform.position;
 
@@ -121,7 +140,17 @@ public class CarAIHandler : MonoBehaviour
         Vector2 sensorStartPos = transform.position;
         sensorStartPos += (Vector2)transform.up * frontSensorPos.y;
 
+        Vector2 sensorStartPosLeft = transform.position;
+        sensorStartPosLeft += (Vector2)transform.up * frontSensorPos.y;
+        sensorStartPosLeft += (Vector2)transform.right * 0.675f;
+
+        Vector2 sensorStartPosRight = transform.position;
+        sensorStartPosRight += (Vector2)transform.up * frontSensorPos.y;
+        sensorStartPosRight -= (Vector2)transform.right * 0.675f;
+
         RaycastHit2D hit = Physics2D.Raycast(sensorStartPos, transform.up, sensorLength);
+        RaycastHit2D hitLeft = Physics2D.Raycast(sensorStartPosLeft, transform.up, sensorLength);
+        RaycastHit2D hitRight = Physics2D.Raycast(sensorStartPosRight, transform.up, sensorLength);
 
         // Center line raycast
         if (hit.collider != null)
@@ -129,20 +158,67 @@ public class CarAIHandler : MonoBehaviour
             if (hit.transform.CompareTag("AI"))
             {
                 Debug.DrawLine(sensorStartPos, hit.point, Color.red);
-                //Debug.Log(transform.name +  "Target Name : " + hit.transform.name + "Target speed : " + hit.transform.GetComponent<Rigidbody2D>().velocity.x);
-                hitdist = hit.distance;
                 if (hit.distance < 5f && hit.distance > 2f)
                     maxSpeed = Mathf.Abs(hit.transform.GetComponent<Rigidbody2D>().velocity.x);
                 else if (hit.distance < 2f)
                 {
-                    topDownCarController.maxSpeed = maxSpeed < 2f ? 0 : maxSpeed;
+                    topDownCarController.maxSpeed = maxSpeed < 2f ? 0 : maxSpeed * 0.6f;
                 }
                 else
                 {
                     topDownCarController.maxSpeed = orignalMaximumSpeed;
                     topDownCarController.accelerationInput = 1f;
                 }
-            }            
+            }
+        }
+        else
+        {
+            topDownCarController.maxSpeed = orignalMaximumSpeed;
+            topDownCarController.accelerationInput = 1f;
+        }
+        
+        // Left line raycast
+        if (hitLeft.collider != null)
+        {
+            if (hitLeft.transform.CompareTag("AI"))
+            {
+                Debug.DrawLine(sensorStartPosLeft, hitLeft.point, Color.red);
+                if (hitLeft.distance < 5f && hitLeft.distance > 2f)
+                    maxSpeed = Mathf.Abs(hitLeft.transform.GetComponent<Rigidbody2D>().velocity.x);
+                else if (hitLeft.distance < 2f)
+                {
+                    topDownCarController.maxSpeed = maxSpeed < 2f ? 0 : maxSpeed * 0.8f;
+                }
+                else
+                {
+                    topDownCarController.maxSpeed = orignalMaximumSpeed;
+                    topDownCarController.accelerationInput = 1f;
+                }
+            }
+        }
+        else
+        {
+            topDownCarController.maxSpeed = orignalMaximumSpeed;
+            topDownCarController.accelerationInput = 1f;
+        }
+        // Right line raycast
+        if (hitRight.collider != null)
+        {
+            if (hitRight.transform.CompareTag("AI"))
+            {
+                Debug.DrawLine(sensorStartPosRight, hitRight.point, Color.red);
+                if (hitRight.distance < 5f && hitRight.distance > 2f)
+                    maxSpeed = Mathf.Abs(hitRight.transform.GetComponent<Rigidbody2D>().velocity.x);
+                else if (hitRight.distance < 2f)
+                {
+                    topDownCarController.maxSpeed = maxSpeed < 2f ? 0 : maxSpeed * 0.8f;
+                }
+                else
+                {
+                    topDownCarController.maxSpeed = orignalMaximumSpeed;
+                    topDownCarController.accelerationInput = 1f;
+                }
+            }
         }
         else
         {
@@ -192,5 +268,12 @@ public class CarAIHandler : MonoBehaviour
     public void SetMakeItStop(bool stop)
     {
         makeItStop = stop;
+    }
+
+    private void OnDestroy()
+    {
+        agent.SetCarStopTimer(timeStopped);
+        if (!carHasStopped)
+            agent.AddReward(1);
     }
 }

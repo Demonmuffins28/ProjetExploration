@@ -1,0 +1,56 @@
+{
+    "IntersectionControl": {
+        "checkpoints": [
+            {
+                "steps": 499950,
+                "file_path": "results\\AllIntersectionTest\\IntersectionControl\\IntersectionControl-499950.onnx",
+                "reward": null,
+                "creation_time": 1648252615.5542808,
+                "auxillary_file_paths": [
+                    "results\\AllIntersectionTest\\IntersectionControl\\IntersectionControl-499950.pt"
+                ]
+            },
+            {
+                "steps": 500050,
+                "file_path": "results\\AllIntersectionTest\\IntersectionControl\\IntersectionControl-500050.onnx",
+                "reward": -1.5,
+                "creation_time": 1648252619.9485476,
+                "auxillary_file_paths": [
+                    "results\\AllIntersectionTest\\IntersectionControl\\IntersectionControl-500050.pt"
+                ]
+            },
+            {
+                "steps": 999978,
+                "file_path": "results\\AllIntersectionTest\\IntersectionControl\\IntersectionControl-999978.onnx",
+                "reward": null,
+                "creation_time": 1648682737.09812,
+                "auxillary_file_paths": [
+                    "results\\AllIntersectionTest\\IntersectionControl\\IntersectionControl-999978.pt"
+                ]
+            },
+            {
+                "steps": 1000014,
+                "file_path": "results\\AllIntersectionTest\\IntersectionControl\\IntersectionControl-1000014.onnx",
+                "reward": -12.300000190734863,
+                "creation_time": 1648682737.1992922,
+                "auxillary_file_paths": [
+                    "results\\AllIntersectionTest\\IntersectionControl\\IntersectionControl-1000014.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1000014,
+            "file_path": "results\\AllIntersectionTest\\IntersectionControl.onnx",
+            "reward": -12.300000190734863,
+            "creation_time": 1648682737.1992922,
+            "auxillary_file_paths": [
+                "results\\AllIntersectionTest\\IntersectionControl\\IntersectionControl-1000014.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

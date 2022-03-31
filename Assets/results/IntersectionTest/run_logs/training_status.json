@@ -1,0 +1,29 @@
+{
+    "OEIntersection": {
+        "checkpoints": [
+            {
+                "steps": 10024,
+                "file_path": "results\\IntersectionTest\\OEIntersection\\OEIntersection-10024.onnx",
+                "reward": -159.0,
+                "creation_time": 1648067446.7623632,
+                "auxillary_file_paths": [
+                    "results\\IntersectionTest\\OEIntersection\\OEIntersection-10024.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 10024,
+            "file_path": "results\\IntersectionTest\\OEIntersection.onnx",
+            "reward": -159.0,
+            "creation_time": 1648067446.7623632,
+            "auxillary_file_paths": [
+                "results\\IntersectionTest\\OEIntersection\\OEIntersection-10024.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

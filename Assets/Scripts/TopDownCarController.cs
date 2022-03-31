@@ -59,7 +59,7 @@ public class TopDownCarController : MonoBehaviour
 
         if (maxSpeed == 0)
         {
-            carRigidbody2D.drag = Mathf.Lerp(carRigidbody2D.drag, slowDownFactor, Time.fixedDeltaTime * 3);
+            carRigidbody2D.drag = Mathf.Lerp(carRigidbody2D.drag, slowDownFactor * 2, Time.fixedDeltaTime * 3);
         }
 
         //Limit so we cannot go faster in any direction while accelerating
