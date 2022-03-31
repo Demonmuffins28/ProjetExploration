@@ -2,15 +2,21 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
+using System.Collections.Generic;
 
 public class IntersectionAgent : Agent
 {
     GameObject OEB, OETLeft, OET, Saint_Jean, EOB, EOT, EOTRight, Fabrique;
+    GameObject interGauche, interMid, interDroite;
     TopDownCarController carController;
     AIIntersectionControls controls;
 
     public float episodeTime = 60f;
-    float timeOfEpisode = 0f;
+    public float timeOfEpisode = 0f;
+    public int totalCarStopped = 0;
+    //float totalCarStopTimer = 0f;
+
+    public float destroyedCarStopTimer = 0f;
 
     private void Awake()
     {
@@ -25,6 +31,9 @@ public class IntersectionAgent : Agent
 
         carController = GetComponent<TopDownCarController>();
         controls = GetComponent<AIIntersectionControls>();
+        interGauche = GameObject.Find("OE_Intersection");
+        interMid = GameObject.Find("Intersection_Milieu");
+        interDroite = GameObject.Find("EO_Intersection");
     }
 
     public override void OnEpisodeBegin()
@@ -63,8 +72,10 @@ public class IntersectionAgent : Agent
                 sensor.AddObservation(carController.GetComponent<Rigidbody2D>().velocity.x);
                 sensor.AddObservation(carController.GetComponent<Rigidbody2D>().velocity.y);
 
-                // agent position (not sure if needed)
-                sensor.AddObservation(this.transform.localPosition);
+                // positions des intersections
+                sensor.AddObservation(interGauche.transform.localPosition);
+                sensor.AddObservation(interMid.transform.localPosition);
+                sensor.AddObservation(interDroite.transform.localPosition);
             }
             catch (System.Exception e)
             {
@@ -74,12 +85,15 @@ public class IntersectionAgent : Agent
     }
 
     public float lightDelay = 1.0f;
+    private int prevOEIntersection = -1;
+    private int prevIntersectionMid = -1;
+    private int prevEOIntersection = -1;
     public override void OnActionReceived(ActionBuffers actions)
     {
-        // Get the action index for the OE intersection
+        // Get the action index for the all intersections
         int OEIntersection = actions.DiscreteActions[0];
-        //int IntersctionMid = actions.DiscreteActions[1];
-        //int EOIntersection = actions.DiscreteActions[2];
+        int IntersectionMid = actions.DiscreteActions[1];
+        int EOIntersection = actions.DiscreteActions[2];
 
         // Look what index it is and change the lights accordingly
         if (OEIntersection == 0) { controls.TurnLeftOE(lightDelay); }
@@ -87,17 +101,40 @@ public class IntersectionAgent : Agent
         if (OEIntersection == 2) { controls.SaintJean(lightDelay); }
         if (OEIntersection == 3) { controls.OEAndOE(lightDelay); }
 
-        Debug.Log(OEIntersection);
+        if (IntersectionMid == 0) { controls.EOTurnLeft(); }
+        if (IntersectionMid == 1) { controls.St_Henri(); }
+        if (IntersectionMid == 2) { controls.A20Milieu(); }
 
-        // Rewards
+        if (EOIntersection == 0) { controls.A20TourneGauche(); }
+        if (EOIntersection == 1) { controls.St_HenriEO(); }
+        if (EOIntersection == 2) { controls.A20EO(); }
+
+        //******* Rewards ************
+
+        // Ajouter une petite penalite a chaque changement de lumiere
+        if (OEIntersection != prevOEIntersection)
+            AddReward(-0.01f);
+        if (IntersectionMid != prevIntersectionMid)
+            AddReward(-0.01f);
+        if (EOIntersection != prevEOIntersection)
+            AddReward(-0.01f);
+
+        prevOEIntersection = OEIntersection;
+        prevIntersectionMid = IntersectionMid;
+        prevEOIntersection = EOIntersection;
+
+  
         GameObject[] AICars = GameObject.FindGameObjectsWithTag("AI");
-        float totalCarTimer = 0;
+        totalCarStopped = 0;
 
         foreach (GameObject car in AICars)
         {
             try
             {
-                totalCarTimer += car.GetComponent<CarAIHandler>().carLifetime;
+                // trouver le nombre de voiture arreter a chaque step
+                if (car.GetComponent<TopDownCarController>().maxSpeed < 1f)
+                    totalCarStopped++;
+                    //totalCarStopTimer += car.GetComponent<CarAIHandler>().timeStopped;
             }
             catch (System.Exception e)
             {
@@ -105,13 +142,22 @@ public class IntersectionAgent : Agent
             }
         }
 
+        //totalCarStopTimer += destroyedCarStopTimer;
+
+        if (totalCarStopped != 0)
+            AddReward(-0.05f * totalCarStopped);
+
         timeOfEpisode += Time.deltaTime;
+
         if (timeOfEpisode >= episodeTime)
         {
-            SetReward(1 / totalCarTimer);
+            //SetReward(1 / totalCarStopTimer);
             EndEpisode();
         }
+    }
 
-        Debug.Log(1 / totalCarTimer);
+    public void SetCarStopTimer(float timer)
+    {
+        destroyedCarStopTimer += timer;
     }
 }

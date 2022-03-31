@@ -105,7 +105,7 @@ PrefabInstance:
     - target: {fileID: 6558350185343971735, guid: d017faad03b9aa946ab12ed85bb3607f,
         type: 3}
       propertyPath: m_Name
-      value: AIPlayer Variant
+      value: AICar
       objectReference: {fileID: 0}
     - target: {fileID: 6558350185343971735, guid: d017faad03b9aa946ab12ed85bb3607f,
         type: 3}
@@ -216,6 +216,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentWaypoint: {fileID: 0}
   hitdist: 0
+  carLifetime: 0
+  timeStopped: 0
   orignalMaximumSpeed: 0
 --- !u!114 &2862665637005490052
 MonoBehaviour:

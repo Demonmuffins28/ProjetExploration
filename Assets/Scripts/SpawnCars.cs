@@ -6,9 +6,11 @@ public class SpawnCars : MonoBehaviour
 {
     public GameObject AICar;
 
+    private float destroyedCarStopTimer = 0f;
+
     Vector2[] tabSpawnPos = {
-        new Vector2(-125,16.3f), // OET
-        new Vector2(-125,12.6f), // OEB
+        new Vector2(-150,16.3f), // OET
+        new Vector2(-150,12f), // OEB
         new Vector2(-80.5f,70f), // Frabrique
         new Vector2(129f,27.7f), // EOT
         new Vector2(129f,24f),   // EOB
@@ -16,7 +18,7 @@ public class SpawnCars : MonoBehaviour
         new Vector2(38.2f, 82.7f), // St-Henri N
         new Vector2(35.9f, 85.5f), // St-Henri N
         //new Vector2(1.2f, 84.1f), // St-Henri N (pas 340)
-        new Vector2(56.7f, -27.4f) // St-Henri S
+        new Vector2(58f, -27.4f) // St-Henri S
     };
     int[] rotAngle = { -90, -90, 180, 90, 90, 0, 120, 120, /*180,*/ 0 };
 
@@ -70,5 +72,14 @@ public class SpawnCars : MonoBehaviour
     public void StopGenerator()
     {
         StopAllCoroutines();
+    }
+    public void SetCarStopTimer(float timer)
+    {
+        destroyedCarStopTimer += timer;
+    }
+
+    public float GetCarStopTimer()
+    {
+        return destroyedCarStopTimer;
     }
 }

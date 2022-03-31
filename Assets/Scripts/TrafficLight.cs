@@ -19,6 +19,7 @@ public class TrafficLight : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        /*
         if (collision.name == "OETLeft")
         {
             // Check if car goes forward or turns
@@ -44,8 +45,8 @@ public class TrafficLight : MonoBehaviour
                 }
 
             }
-        }
-        else if (collision.name == "EOTRight")
+        } */
+        if (collision.name == "EOTRight")
         {
             if (carAIHandler.currentWaypoint.name is "WaypointNode(5)" or "WaypointNode(6)")
             {
@@ -81,6 +82,7 @@ public class TrafficLight : MonoBehaviour
         {
             carAIHandler.SetMakeItStop(false);
             topDownCarController.accelerationInput = 1f;
+            topDownCarController.maxSpeed = carAIHandler.orignalMaximumSpeed;
             topDownCarController.SetAccelerationFactor(30.0f);
         }            
     }
