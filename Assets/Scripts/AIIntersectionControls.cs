@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class AIIntersectionControls : MonoBehaviour
 {
+    // a20 oe
     GameObject OEB, OETLeft, OET, SJ, EOB, EOT, EOTRight, Fab;
+    GameObject EOL, OEL, OETurnL, SJL, EOTurnL, FabL;
 
+    // a20 milieu
     GameObject OEB_M, OET_M, EOB_M, EOT_M, SH_Left_M, SH_Right_M, OEBRight_M, EOBLeft_M;
+    GameObject EOL_M, OEL_M, OETurnL_M, EOTurnL_M, SHL_M;
 
+    // a20 eo
     GameObject OEB_EO, OET_EO, EOB_EO, EOT_EO, OETLeft_EO, EOBLeft_EO, St_Henri_EO;
+    GameObject EOL_EO, OEL_EO, OETurnL_EO, EOTurnL_EO, SHL_EO;
 
     private void Awake()
     {
@@ -37,6 +43,14 @@ public class AIIntersectionControls : MonoBehaviour
         OETLeft_EO = GameObject.Find("OETLeft_EO");
         EOBLeft_EO = GameObject.Find("EOBLeft_EO");
         St_Henri_EO = GameObject.Find("St-Henri_EO");
+
+        // Lumieres
+        OEL = GameObject.Find("OEGreen");
+        OETurnL = GameObject.Find("OETurnGreen");
+        EOL = GameObject.Find("EOGreen");
+        SJL = GameObject.Find("SJGreen");
+        EOTurnL = GameObject.Find("EORightGreen");
+        FabL = GameObject.Find("FabGreen");
     }
 
     /***************************** Intersection de gauche OE ****************************************/
@@ -50,79 +64,91 @@ public class AIIntersectionControls : MonoBehaviour
         EOT.SetActive(true);
         EOTRight.SetActive(true);
         Fab.SetActive(true);
+
+        OETurnL.GetComponent<_Light>().couleurLumiere = 2;
+        OEL.GetComponent<_Light>().couleurLumiere = 2;
+        EOL.GetComponent<_Light>().couleurLumiere = 2;
+        SJL.GetComponent<_Light>().couleurLumiere = 2;
+        EOTurnL.GetComponent<_Light>().couleurLumiere = 2;
+        FabL.GetComponent<_Light>().couleurLumiere = 2;
+    }
+
+    public void TourneJauneOE(int decisionID)
+    {
+        switch (decisionID)
+        {
+            case 0:
+                OETurnL.GetComponent<_Light>().couleurLumiere = 3;
+                OEL.GetComponent<_Light>().couleurLumiere = 3;
+                break;
+            case 1:
+                FabL.GetComponent<_Light>().couleurLumiere = 3;
+                break;
+            case 2:
+                SJL.GetComponent<_Light>().couleurLumiere = 3;
+                break;
+            case 3:
+                OEL.GetComponent<_Light>().couleurLumiere = 3;
+                EOTurnL.GetComponent<_Light>().couleurLumiere = 3;
+                EOL.GetComponent<_Light>().couleurLumiere = 3;
+                break;
+            default:
+                break;
+        }
+
+        OEB.SetActive(true);
+        OETLeft.SetActive(true);
+        OET.SetActive(true);
+        SJ.SetActive(true);
+        EOB.SetActive(true);
+        EOT.SetActive(true);
+        EOTRight.SetActive(true);
+        Fab.SetActive(true);
     }
 
     // Action 1
-    public void TurnLeftOE(float delay)
+    public void TurnLeftOE()
     {
-        /*      EOB.SetActive(true);
-                EOT.SetActive(true);
-                EOTRight.SetActive(true);*/
         TourneRougeOE();
-        //Invoke("Case1", delay);
         OETLeft.SetActive(false);
         OEB.SetActive(false);
         OET.SetActive(false);
+
+        OETurnL.GetComponent<_Light>().couleurLumiere = 1;
+        OEL.GetComponent<_Light>().couleurLumiere = 1;
     }
 
     // Action 2
-    public void Fabrique(float delay)
+    public void Fabrique()
     {
-        /*      OEB.SetActive(true);
-                OET.SetActive(true);
-                OETLeft.SetActive(true);*/
         TourneRougeOE();
-        //Invoke("Case2", delay);
         Fab.SetActive(false);
+
+        FabL.GetComponent<_Light>().couleurLumiere = 1;
     }
 
     // Action 3
-    public void SaintJean(float delay)
+    public void SaintJean()
     {
-        //Fab.SetActive(true);
         TourneRougeOE();
-        //Invoke("Case3", delay);
         SJ.SetActive(false);
+
+        SJL.GetComponent<_Light>().couleurLumiere = 1;
     }
 
     // Action 4
-    public void OEAndOE(float delay)
+    public void OEAndOE()
     {
-        /*      SJ.SetActive(true);
-                OETLeft.SetActive(true);*/
         TourneRougeOE();
-        //Invoke("Case4", delay);
         OEB.SetActive(false);
         OET.SetActive(false);
         EOB.SetActive(false);
         EOT.SetActive(false);
         EOTRight.SetActive(false);
-    }
 
-    private void Case1()
-    {
-        OETLeft.SetActive(false);
-        OEB.SetActive(false);
-        OET.SetActive(false);
-    }
-
-    private void Case2()
-    {
-        Fab.SetActive(false);
-    }
-
-    private void Case3()
-    {
-        SJ.SetActive(false);
-    }
-
-    private void Case4()
-    {
-        OEB.SetActive(false);
-        OET.SetActive(false);
-        EOB.SetActive(false);
-        EOT.SetActive(false);
-        EOTRight.SetActive(false);
+        OEL.GetComponent<_Light>().couleurLumiere = 1;
+        EOTurnL.GetComponent<_Light>().couleurLumiere = 1;
+        EOL.GetComponent<_Light>().couleurLumiere = 1;
     }
 
     /***************************** Intersection du milieu ****************************************/
@@ -138,9 +164,14 @@ public class AIIntersectionControls : MonoBehaviour
         EOBLeft_M.SetActive(true);
     }
 
-    public void EOTurnLeft()
+    public void TourneJauneMilieu()
     {
         TourneRougeMilieu();
+    }
+
+    public void EOTurnLeft()
+    {
+        //TourneRougeMilieu();
         EOB_M.SetActive(false);
         EOT_M.SetActive(false);
         EOBLeft_M.SetActive(false);
@@ -148,14 +179,14 @@ public class AIIntersectionControls : MonoBehaviour
 
     public void St_Henri()
     {
-        TourneRougeMilieu();
+        //TourneRougeMilieu();
         SH_Left_M.SetActive(false);
         SH_Right_M.SetActive(false);
     }
 
     public void A20Milieu()
     {
-        TourneRougeMilieu();
+        //TourneRougeMilieu();
         OEB_M.SetActive(false);
         OET_M.SetActive(false);
         OEBRight_M.SetActive(false);
@@ -175,22 +206,27 @@ public class AIIntersectionControls : MonoBehaviour
         St_Henri_EO.SetActive(true);
     }
 
-    public void A20TourneGauche()
+    public void TourneJauneEO()
     {
         TourneRougeEO();
+    }
+
+    public void A20TourneGauche()
+    {
+        //TourneRougeEO();
         OETLeft_EO.SetActive(false);
         EOBLeft_EO.SetActive(false);
     }
 
     public void St_HenriEO()
     {
-        TourneRougeEO();
+        //TourneRougeEO();
         St_Henri_EO.SetActive(false);
     }
 
     public void A20EO()
     {
-        TourneRougeEO();
+        //TourneRougeEO();
         OEB_EO.SetActive(false);
         OET_EO.SetActive(false);
         EOB_EO.SetActive(false);

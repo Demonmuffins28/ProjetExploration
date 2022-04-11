@@ -84,7 +84,6 @@ public class IntersectionAgent : Agent
         }
     }
 
-    public float lightDelay = 1.0f;
     private int prevOEIntersection = -1;
     private int prevIntersectionMid = -1;
     private int prevEOIntersection = -1;
@@ -96,32 +95,41 @@ public class IntersectionAgent : Agent
         int EOIntersection = actions.DiscreteActions[2];
 
         // Look what index it is and change the lights accordingly
-        if (OEIntersection == 0) { controls.TurnLeftOE(lightDelay); }
-        if (OEIntersection == 1) { controls.Fabrique(lightDelay); }
-        if (OEIntersection == 2) { controls.SaintJean(lightDelay); }
-        if (OEIntersection == 3) { controls.OEAndOE(lightDelay); }
+        if (OEIntersection != prevOEIntersection && prevEOIntersection != -1) { controls.TourneJauneOE(prevOEIntersection); }
+        else if (OEIntersection == 0) { controls.TurnLeftOE(); }
+        else if (OEIntersection == 1) { controls.Fabrique(); }
+        else if (OEIntersection == 2) { controls.SaintJean(); }
+        else if (OEIntersection == 3) { controls.OEAndOE(); }
 
-        if (IntersectionMid == 0) { controls.EOTurnLeft(); }
-        if (IntersectionMid == 1) { controls.St_Henri(); }
-        if (IntersectionMid == 2) { controls.A20Milieu(); }
+        if (IntersectionMid != prevIntersectionMid) { controls.TourneJauneMilieu(); }
+        else if (IntersectionMid == 0) { controls.EOTurnLeft(); }
+        else if (IntersectionMid == 1) { controls.St_Henri(); }
+        else if (IntersectionMid == 2) { controls.A20Milieu(); }
 
-        if (EOIntersection == 0) { controls.A20TourneGauche(); }
-        if (EOIntersection == 1) { controls.St_HenriEO(); }
-        if (EOIntersection == 2) { controls.A20EO(); }
+        if (EOIntersection != prevEOIntersection) { controls.TourneJauneEO(); }
+        else if (EOIntersection == 0) { controls.A20TourneGauche(); }
+        else if (EOIntersection == 1) { controls.St_HenriEO(); }
+        else if (EOIntersection == 2) { controls.A20EO(); }
 
         //******* Rewards ************
+        prevOEIntersection = OEIntersection;
+        prevIntersectionMid = IntersectionMid;
+        prevEOIntersection = EOIntersection;
 
         // Ajouter une petite penalite a chaque changement de lumiere
         if (OEIntersection != prevOEIntersection)
+        {
             AddReward(-0.01f);
+            prevOEIntersection = -1;
+        }
+
         if (IntersectionMid != prevIntersectionMid)
             AddReward(-0.01f);
         if (EOIntersection != prevEOIntersection)
             AddReward(-0.01f);
 
-        prevOEIntersection = OEIntersection;
-        prevIntersectionMid = IntersectionMid;
-        prevEOIntersection = EOIntersection;
+        
+ 
 
   
         GameObject[] AICars = GameObject.FindGameObjectsWithTag("AI");
@@ -145,7 +153,7 @@ public class IntersectionAgent : Agent
         //totalCarStopTimer += destroyedCarStopTimer;
 
         if (totalCarStopped != 0)
-            AddReward(-0.05f * totalCarStopped);
+            AddReward(-0.1f * totalCarStopped);
 
         timeOfEpisode += Time.deltaTime;
 

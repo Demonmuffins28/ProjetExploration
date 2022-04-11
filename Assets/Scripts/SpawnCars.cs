@@ -8,6 +8,9 @@ public class SpawnCars : MonoBehaviour
 
     private float destroyedCarStopTimer = 0f;
 
+    private CarAIHandler carAIHandler;
+    private WaypointNode waypoint;
+
     Vector2[] tabSpawnPos = {
         new Vector2(-150,16.3f), // OET
         new Vector2(-150,12f), // OEB
@@ -27,25 +30,23 @@ public class SpawnCars : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        /*
-        int i = 0;
-        foreach (var pos in tabSpawnPos)
-        {
-            Instantiate(AICar, pos, Quaternion.Euler(0f, 0f, rotAngle[i]));
-            i++;
-        }
-        */
+        carAIHandler = GetComponent<CarAIHandler>();
+        waypoint = GetComponent<WaypointNode>();
 
         Invoke("StartGenerator", delay);
-        //StartGenerator();
     }
 
     private IEnumerator CarGenerator()
     {
         GameObject TrainingArea = GameObject.Find("TrainingArea");
+        
 
         while (true)
         {
+            int countCars = GameObject.FindGameObjectsWithTag("AI").Length;
+
+            //Debug.Log(countCars);
+
             int randPos1 = Random.Range(0, tabSpawnPos.Length);
             if (randPos1 is 2 or 5 or 8)
             {
@@ -60,7 +61,7 @@ public class SpawnCars : MonoBehaviour
                 Vector2 randV2Pos = tabSpawnPos[randPos1];
                 Instantiate(AICar, randV2Pos, Quaternion.Euler(0f, 0f, rotAngle[randPos1]), TrainingArea.transform);
                 yield return new WaitForSeconds(Mathf.Lerp(0.5f, 1.5f, Random.value));
-            }              
+            }
         }
     }
 
