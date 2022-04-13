@@ -36,13 +36,22 @@
                 "auxillary_file_paths": [
                     "results\\AllIntersectionTest\\IntersectionControl\\IntersectionControl-1000014.pt"
                 ]
+            },
+            {
+                "steps": 1000014,
+                "file_path": "results\\AllIntersectionTest\\IntersectionControl\\IntersectionControl-1000014.onnx",
+                "reward": null,
+                "creation_time": 1648688313.5094645,
+                "auxillary_file_paths": [
+                    "results\\AllIntersectionTest\\IntersectionControl\\IntersectionControl-1000014.pt"
+                ]
             }
         ],
         "final_checkpoint": {
             "steps": 1000014,
             "file_path": "results\\AllIntersectionTest\\IntersectionControl.onnx",
-            "reward": -12.300000190734863,
-            "creation_time": 1648682737.1992922,
+            "reward": null,
+            "creation_time": 1648688313.5094645,
             "auxillary_file_paths": [
                 "results\\AllIntersectionTest\\IntersectionControl\\IntersectionControl-1000014.pt"
             ]

@@ -1,0 +1,38 @@
+{
+    "IntersectionControl": {
+        "checkpoints": [
+            {
+                "steps": 11401,
+                "file_path": "results\\MyOwnIntersections\\IntersectionControl\\IntersectionControl-11401.onnx",
+                "reward": -180.4964327130999,
+                "creation_time": 1648688928.9276462,
+                "auxillary_file_paths": [
+                    "results\\MyOwnIntersections\\IntersectionControl\\IntersectionControl-11401.pt"
+                ]
+            },
+            {
+                "steps": 18629,
+                "file_path": "results\\MyOwnIntersections\\IntersectionControl\\IntersectionControl-18629.onnx",
+                "reward": -194.50273271040484,
+                "creation_time": 1648689467.6213958,
+                "auxillary_file_paths": [
+                    "results\\MyOwnIntersections\\IntersectionControl\\IntersectionControl-18629.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 18629,
+            "file_path": "results\\MyOwnIntersections\\IntersectionControl.onnx",
+            "reward": -194.50273271040484,
+            "creation_time": 1648689467.6213958,
+            "auxillary_file_paths": [
+                "results\\MyOwnIntersections\\IntersectionControl\\IntersectionControl-18629.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
