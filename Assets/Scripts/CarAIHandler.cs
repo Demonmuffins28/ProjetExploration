@@ -98,12 +98,12 @@ public class CarAIHandler : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (topDownCarController.GetVelocityMagnitude() > 5 
+        if (topDownCarController.accelerationInput > 0
             && collision.gameObject.GetComponent<TopDownCarController>().accelerationInput == 0)
         {
             SetMakeItStop(true);
             transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
-            Debug.Log("Car hit");
+            //Debug.Log("Car hit");
         }
         else
         {

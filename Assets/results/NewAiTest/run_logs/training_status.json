@@ -2,15 +2,6 @@
     "IntersectionControl": {
         "checkpoints": [
             {
-                "steps": 499992,
-                "file_path": "results\\NewAiTest\\IntersectionControl\\IntersectionControl-499992.onnx",
-                "reward": -106.93571533475604,
-                "creation_time": 1649203474.768401,
-                "auxillary_file_paths": [
-                    "results\\NewAiTest\\IntersectionControl\\IntersectionControl-499992.pt"
-                ]
-            },
-            {
                 "steps": 500064,
                 "file_path": "results\\NewAiTest\\IntersectionControl\\IntersectionControl-500064.onnx",
                 "reward": -103.81875091791153,
@@ -45,15 +36,24 @@
                 "auxillary_file_paths": [
                     "results\\NewAiTest\\IntersectionControl\\IntersectionControl-1500056.pt"
                 ]
+            },
+            {
+                "steps": 1967848,
+                "file_path": "results\\NewAiTest\\IntersectionControl\\IntersectionControl-1967848.onnx",
+                "reward": -79.6650001472897,
+                "creation_time": 1649711983.2821255,
+                "auxillary_file_paths": [
+                    "results\\NewAiTest\\IntersectionControl\\IntersectionControl-1967848.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 1500056,
+            "steps": 1967848,
             "file_path": "results\\NewAiTest\\IntersectionControl.onnx",
-            "reward": -72.3885726588113,
-            "creation_time": 1649337189.5739498,
+            "reward": -79.6650001472897,
+            "creation_time": 1649711983.2821255,
             "auxillary_file_paths": [
-                "results\\NewAiTest\\IntersectionControl\\IntersectionControl-1500056.pt"
+                "results\\NewAiTest\\IntersectionControl\\IntersectionControl-1967848.pt"
             ]
         }
     },
