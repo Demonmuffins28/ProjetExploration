@@ -1,0 +1,65 @@
+{
+    "IntersectionControl": {
+        "checkpoints": [
+            {
+                "steps": 999992,
+                "file_path": "results\\AIWithYellowLight_fromAllIntersection\\IntersectionControl\\IntersectionControl-999992.onnx",
+                "reward": -105.2388887140486,
+                "creation_time": 1649123754.6048915,
+                "auxillary_file_paths": [
+                    "results\\AIWithYellowLight_fromAllIntersection\\IntersectionControl\\IntersectionControl-999992.pt"
+                ]
+            },
+            {
+                "steps": 1000056,
+                "file_path": "results\\AIWithYellowLight_fromAllIntersection\\IntersectionControl\\IntersectionControl-1000056.onnx",
+                "reward": -105.2388887140486,
+                "creation_time": 1649123754.714911,
+                "auxillary_file_paths": [
+                    "results\\AIWithYellowLight_fromAllIntersection\\IntersectionControl\\IntersectionControl-1000056.pt"
+                ]
+            },
+            {
+                "steps": 1499984,
+                "file_path": "results\\AIWithYellowLight_fromAllIntersection\\IntersectionControl\\IntersectionControl-1499984.onnx",
+                "reward": -67.33399994373322,
+                "creation_time": 1649150380.6718547,
+                "auxillary_file_paths": [
+                    "results\\AIWithYellowLight_fromAllIntersection\\IntersectionControl\\IntersectionControl-1499984.pt"
+                ]
+            },
+            {
+                "steps": 1999984,
+                "file_path": "results\\AIWithYellowLight_fromAllIntersection\\IntersectionControl\\IntersectionControl-1999984.onnx",
+                "reward": -65.75500111579895,
+                "creation_time": 1649163730.4383225,
+                "auxillary_file_paths": [
+                    "results\\AIWithYellowLight_fromAllIntersection\\IntersectionControl\\IntersectionControl-1999984.pt"
+                ]
+            },
+            {
+                "steps": 2000048,
+                "file_path": "results\\AIWithYellowLight_fromAllIntersection\\IntersectionControl\\IntersectionControl-2000048.onnx",
+                "reward": -65.75500111579895,
+                "creation_time": 1649163730.554342,
+                "auxillary_file_paths": [
+                    "results\\AIWithYellowLight_fromAllIntersection\\IntersectionControl\\IntersectionControl-2000048.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2000048,
+            "file_path": "results\\AIWithYellowLight_fromAllIntersection\\IntersectionControl.onnx",
+            "reward": -65.75500111579895,
+            "creation_time": 1649163730.554342,
+            "auxillary_file_paths": [
+                "results\\AIWithYellowLight_fromAllIntersection\\IntersectionControl\\IntersectionControl-2000048.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

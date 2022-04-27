@@ -36,11 +36,14 @@ public class CarAIHandler : MonoBehaviour
     //Components
     TopDownCarController topDownCarController;
     IntersectionAgent agent;
+    //SpriteRenderer spriteRenderer;
 
     //Awake is called when the script instance is being loaded.
     void Awake()
     {
         topDownCarController = GetComponent<TopDownCarController>();
+        //spriteRenderer = GetComponent<SpriteRenderer>();
+
         allWayPoints = FindObjectsOfType<WaypointNode>();
         agent = FindObjectOfType<IntersectionAgent>();
 
@@ -90,8 +93,27 @@ public class CarAIHandler : MonoBehaviour
         {
             timeStopped += Time.deltaTime;
             carHasStopped = true;
+        }   
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (topDownCarController.accelerationInput > 0
+            && collision.gameObject.GetComponent<TopDownCarController>().accelerationInput == 0)
+        {
+            SetMakeItStop(true);
+            transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
+            //Debug.Log("Car hit");
         }
-      
+        else
+        {
+            transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.magenta;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        SetMakeItStop(false);
     }
 
     //AI follows waypoints
@@ -275,5 +297,10 @@ public class CarAIHandler : MonoBehaviour
         agent.SetCarStopTimer(timeStopped);
         if (!carHasStopped)
             agent.AddReward(1);
+    }
+
+    public void SetWaypoint(WaypointNode wp)
+    {
+        currentWaypoint = wp;
     }
 }

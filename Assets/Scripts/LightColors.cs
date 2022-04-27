@@ -36,7 +36,7 @@ public class LightColors : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // OE goes straight
+/*        // OE goes straight
         if (OEB.activeSelf)
         {
             lCol.transform.Find("OEGreen").gameObject.SetActive(false);
@@ -58,10 +58,10 @@ public class LightColors : MonoBehaviour
         {
             lCol.transform.Find("OETurnGreen").gameObject.SetActive(true);
             lCol.transform.Find("OETurnRed").gameObject.SetActive(false);
-        }
+        }*/
 
         // Saint jean
-        if (Saint_Jean.activeSelf)
+        /*if (Saint_Jean.activeSelf)
         {
             lCol.transform.Find("SJGreen").gameObject.SetActive(false);
             lCol.transform.Find("SJRed").gameObject.SetActive(true);
@@ -73,7 +73,7 @@ public class LightColors : MonoBehaviour
         }
 
         // EO go straight
-        if (EOT.activeSelf)
+*//*        if (EOT.activeSelf)
         {
             lCol.transform.Find("EOGreen").gameObject.SetActive(false);
             lCol.transform.Find("EORed").gameObject.SetActive(true);
@@ -82,7 +82,13 @@ public class LightColors : MonoBehaviour
         {
             lCol.transform.Find("EOGreen").gameObject.SetActive(true);
             lCol.transform.Find("EORed").gameObject.SetActive(false);
-        }
+        }*//*
+        
+        // test
+        if (EOT.activeSelf)
+            lCol.transform.Find("EORed").GetComponent<_Light>().couleurLumiere = 2;
+        else
+            lCol.transform.Find("EORed").GetComponent<_Light>().couleurLumiere = 1;
 
         // EO turn right
         if (EOTRight.activeSelf)
@@ -106,7 +112,7 @@ public class LightColors : MonoBehaviour
         {
             lCol.transform.Find("FabGreen").gameObject.SetActive(true);
             lCol.transform.Find("FabRed").gameObject.SetActive(false);
-        }
+        }*/
 
         // **************** Middle intersection *****************************
 

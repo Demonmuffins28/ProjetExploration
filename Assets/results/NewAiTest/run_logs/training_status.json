@@ -1,0 +1,65 @@
+{
+    "IntersectionControl": {
+        "checkpoints": [
+            {
+                "steps": 500064,
+                "file_path": "results\\NewAiTest\\IntersectionControl\\IntersectionControl-500064.onnx",
+                "reward": -103.81875091791153,
+                "creation_time": 1649203477.7804213,
+                "auxillary_file_paths": [
+                    "results\\NewAiTest\\IntersectionControl\\IntersectionControl-500064.pt"
+                ]
+            },
+            {
+                "steps": 999992,
+                "file_path": "results\\NewAiTest\\IntersectionControl\\IntersectionControl-999992.onnx",
+                "reward": -89.3999993801117,
+                "creation_time": 1649322153.0761123,
+                "auxillary_file_paths": [
+                    "results\\NewAiTest\\IntersectionControl\\IntersectionControl-999992.pt"
+                ]
+            },
+            {
+                "steps": 1499992,
+                "file_path": "results\\NewAiTest\\IntersectionControl\\IntersectionControl-1499992.onnx",
+                "reward": -72.3885726588113,
+                "creation_time": 1649337189.4324253,
+                "auxillary_file_paths": [
+                    "results\\NewAiTest\\IntersectionControl\\IntersectionControl-1499992.pt"
+                ]
+            },
+            {
+                "steps": 1500056,
+                "file_path": "results\\NewAiTest\\IntersectionControl\\IntersectionControl-1500056.onnx",
+                "reward": -72.3885726588113,
+                "creation_time": 1649337189.5739498,
+                "auxillary_file_paths": [
+                    "results\\NewAiTest\\IntersectionControl\\IntersectionControl-1500056.pt"
+                ]
+            },
+            {
+                "steps": 1967848,
+                "file_path": "results\\NewAiTest\\IntersectionControl\\IntersectionControl-1967848.onnx",
+                "reward": -79.6650001472897,
+                "creation_time": 1649711983.2821255,
+                "auxillary_file_paths": [
+                    "results\\NewAiTest\\IntersectionControl\\IntersectionControl-1967848.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1967848,
+            "file_path": "results\\NewAiTest\\IntersectionControl.onnx",
+            "reward": -79.6650001472897,
+            "creation_time": 1649711983.2821255,
+            "auxillary_file_paths": [
+                "results\\NewAiTest\\IntersectionControl\\IntersectionControl-1967848.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
