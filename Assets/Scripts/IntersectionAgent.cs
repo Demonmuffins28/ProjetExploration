@@ -94,44 +94,37 @@ public class IntersectionAgent : Agent
         int IntersectionMid = actions.DiscreteActions[1];
         int EOIntersection = actions.DiscreteActions[2];
 
+        //Debug.Log("Action : " + OEIntersection + " ; PrevAction : " + prevOEIntersection);
+
         // Look what index it is and change the lights accordingly
-        if (OEIntersection != prevOEIntersection && prevEOIntersection != -1) { controls.TourneJauneOE(prevOEIntersection); }
-        else if (OEIntersection == 0) { controls.TurnLeftOE(); }
-        else if (OEIntersection == 1) { controls.Fabrique(); }
-        else if (OEIntersection == 2) { controls.SaintJean(); }
-        else if (OEIntersection == 3) { controls.OEAndOE(); }
+        if (OEIntersection == 0 && prevOEIntersection != OEIntersection) { controls.ActionOE(OEIntersection, prevOEIntersection); }
+        else if (OEIntersection == 1 && prevOEIntersection != OEIntersection) { controls.ActionOE(OEIntersection, prevOEIntersection); }
+        else if (OEIntersection == 2 && prevOEIntersection != OEIntersection) { controls.ActionOE(OEIntersection, prevOEIntersection); }
+        else if (OEIntersection == 3 && prevOEIntersection != OEIntersection) { controls.ActionOE(OEIntersection, prevOEIntersection); }
 
-        if (IntersectionMid != prevIntersectionMid) { controls.TourneJauneMilieu(); }
-        else if (IntersectionMid == 0) { controls.EOTurnLeft(); }
-        else if (IntersectionMid == 1) { controls.St_Henri(); }
-        else if (IntersectionMid == 2) { controls.A20Milieu(); }
+        if (IntersectionMid == 0 && prevIntersectionMid != IntersectionMid) { controls.ActionMid(IntersectionMid, prevIntersectionMid); }
+        else if (IntersectionMid == 1 && prevIntersectionMid != IntersectionMid) { controls.ActionMid(IntersectionMid, prevIntersectionMid); }
+        else if (IntersectionMid == 2 && prevIntersectionMid != IntersectionMid) { controls.ActionMid(IntersectionMid, prevIntersectionMid); }
 
-        if (EOIntersection != prevEOIntersection) { controls.TourneJauneEO(); }
-        else if (EOIntersection == 0) { controls.A20TourneGauche(); }
-        else if (EOIntersection == 1) { controls.St_HenriEO(); }
-        else if (EOIntersection == 2) { controls.A20EO(); }
+        if (EOIntersection == 0 && prevEOIntersection != EOIntersection) { controls.ActionEO(EOIntersection, prevEOIntersection); }
+        else if (EOIntersection == 1 && prevEOIntersection != EOIntersection) { controls.ActionEO(EOIntersection, prevEOIntersection); }
+        else if (EOIntersection == 2 && prevEOIntersection != EOIntersection) { controls.ActionEO(EOIntersection, prevEOIntersection); }
 
         //******* Rewards ************
-        prevOEIntersection = OEIntersection;
-        prevIntersectionMid = IntersectionMid;
-        prevEOIntersection = EOIntersection;
 
         // Ajouter une petite penalite a chaque changement de lumiere
         if (OEIntersection != prevOEIntersection)
-        {
             AddReward(-0.01f);
-            prevOEIntersection = -1;
-        }
-
         if (IntersectionMid != prevIntersectionMid)
             AddReward(-0.01f);
         if (EOIntersection != prevEOIntersection)
             AddReward(-0.01f);
 
-        
- 
+        prevOEIntersection = OEIntersection;
+        prevIntersectionMid = IntersectionMid;
+        prevEOIntersection = EOIntersection;       
 
-  
+
         GameObject[] AICars = GameObject.FindGameObjectsWithTag("AI");
         totalCarStopped = 0;
 
