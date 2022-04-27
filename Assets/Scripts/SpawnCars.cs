@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class SpawnCars : MonoBehaviour
 {
@@ -72,9 +73,20 @@ public class SpawnCars : MonoBehaviour
     // intSpawnPos == random (entre 0 et 8 inclusivement) correspondant a un vecteur dans le tableau tabSpawnWpPos
     // fPosition == position ou on veut verifier s'il y a une voiture
     // charOrientation == correspond a l'orientation de la nouvelle voiture h:horizontal v:vertical
-    private bool isOccupied(float fPosition, char charOrientation)
+    private bool isOccupied(int randPosCar, GameObject newCar)
     {
         GameObject[] AICars = GameObject.FindGameObjectsWithTag("AI");
+
+        char charOrientation = 'v';
+        float fPositionSpawn = -1;
+
+        if (randPosCar is 0 or 1 or 3 or 4)
+        {
+            charOrientation = 'h';
+            fPositionSpawn = newCar.transform.localPosition.x;
+        }
+        else
+            fPositionSpawn = newCar.transform.localPosition.y;
 
         foreach (GameObject car in AICars)
         {
@@ -89,11 +101,77 @@ public class SpawnCars : MonoBehaviour
             // Si la position de l'avant de la voiture courante est plus grande que la position de l'arriere de la voiture qu'on veut placer
             // OU si la position de l'arriere de la voiture courante est plus petite que la position de l'avant de la voiture qu'on veut placer
             // Alors l'espace est occupe (return true)
-            if (fPosCarCourant + 2 > fPosition - 2 || fPosCarCourant - 2 < fPosition + 2)
+
+            if ((fPosCarCourant + 2 > fPositionSpawn - 2 || fPosCarCourant - 2 < fPositionSpawn + 2) && newCar != car)
                 return true;
         }
 
         return false;
+    }
+
+    private void translateCar(int randPosCar, GameObject newCar)
+    {
+        GameObject[] AICars = GameObject.FindGameObjectsWithTag("AI");
+
+        //char charOrientation = 'v';
+        //float fPositionSpawn = -1;
+
+        /*
+        if (randPosCar is 0 or 1 or 3 or 4)
+        {
+            charOrientation = 'h';
+            fPositionSpawn = newCar.transform.localPosition.x;
+        }
+        else
+            fPositionSpawn = newCar.transform.localPosition.y;
+        */
+
+        foreach (GameObject car in AICars)
+        {
+            //float fPosCarCourant = -1000f; //Position de la voiture courante.
+
+            // Si l'orientation du waypoint/de la voiture courante est horizontale, on recupere le x
+            //if (charOrientation == 'h')
+            //    fPosCarCourant = car.transform.localPosition.x;
+            //else
+            //    fPosCarCourant = car.transform.localPosition.y;
+
+            /*
+            if (charOrientation == 'h')
+            {
+                if (car.transform.localPosition.x + 2 > newCar.transform.localPosition.x - 2 || car.transform.localPosition.x - 2 < newCar.transform.localPosition.x + 2)
+                {
+                    newCar.transform.Translate(new Vector2(0, -3f));
+                    translateCar(randPosCar, newCar);
+                }
+            }
+            else
+            {
+                if ((car.transform.localPosition.x + 2 > newCar.transform.localPosition.x - 2 || car.transform.localPosition.x - 2 < newCar.transform.localPosition.x + 2) && (car.transform.localPosition.y + 2 > newCar.transform.localPosition.y - 2 || car.transform.localPosition.y - 2 < newCar.transform.localPosition.y + 2))
+                {
+                    newCar.transform.Translate(new Vector2(0, -3f));
+                    translateCar(randPosCar, newCar);
+                }
+            }
+            */
+            if (car != newCar)
+            {
+                float xCourant = car.transform.localPosition.x;
+                float yCourant = car.transform.localPosition.y;
+                float xNew = newCar.transform.localPosition.x;
+                float yNew = newCar.transform.localPosition.y;
+
+                Debug.Log("xCourant : " + xCourant + " yCourant : " + yCourant + " xNew : " + xNew + " yNew " + yNew);
+                Debug.Log((xCourant + 2 > xNew - 2 && xCourant - 2 < xNew + 2) && (yCourant + 2 > yNew - 2 && yCourant - 2 < yNew + 2));
+
+                if ((xCourant + 2 > xNew - 2 && xCourant - 2 < xNew + 2) && (yCourant + 2 > yNew - 2 && yCourant - 2 < yNew + 2))
+                {
+                    newCar.transform.Translate(new Vector2(0, -3f));
+                    translateCar(randPosCar, newCar);
+                }
+            }
+            
+        }
     }
 
     private IEnumerator CarGenerator()
@@ -106,7 +184,7 @@ public class SpawnCars : MonoBehaviour
             int intNbCarsTotal = GameObject.FindGameObjectsWithTag("AI").Length;
             //Debug.Log("test " + intNbCars);
 
-            if (intNbCarsTotal < 15)
+            if (intNbCarsTotal < 50)
             {
                 // Decider le nombre de voitures spawn
                 int intLowest = 1;
@@ -114,11 +192,11 @@ public class SpawnCars : MonoBehaviour
 
                 switch (intNbCarsTotal)
                 {
-                    case < 3:
+                    case < 10:
                         intLowest = 5;
                         break;
-                    case < 7:
-                        intHighest = 5;
+                    case < 20:
+                        intHighest = 6;
                         break;
                     default:
                         intHighest = 3;
@@ -128,12 +206,87 @@ public class SpawnCars : MonoBehaviour
                 int intNbCars = Random.Range(intLowest, intHighest); //Nombre de voitures a spawn
 
                 // Spawn les voitures
-                int intNbCarsSpawned = 0; //Nombre de voitures qui ont spawn jusqu'a date.
-                int randPosCar = Random.Range(0, tabSpawnPos.Length); // Position random du spawn correspondant au tableau 'tabSpawnPos'
-                char charOrientation = 'v'; // Orientation du waypoint/de la voiture
-                Vector2 spawnPoint = tabSpawnPos[randPosCar]; // Vecteur qui correspond au spawnpoint qui correspond a randPosCar
-                float fPosSpawn = 0; // Position ou la voiture va spawn (x ou y dependant du charOrientation)
+                int randPosCar = 0; // Position random du spawn correspondant au tableau 'tabSpawnPos'
 
+                // NEW RECIPE
+
+                for (int i = 0; i < intNbCars; i++)
+                {
+                    randPosCar = Random.Range(0, tabSpawnPos.Length);
+                    Vector2 posCar = tabSpawnPos[randPosCar];
+
+                    GameObject newCar = Instantiate(AICar, posCar, Quaternion.Euler(0f, 0f, rotAngle[randPosCar]), TrainingArea.transform);
+
+                    //Debug.Log(isOccupied(randPosCar, newCar));
+                    
+                    translateCar(randPosCar, newCar);
+
+                    
+                    //if (isOccupied(randPosCar, newCar))
+                    //    newCar.transform.Translate(new Vector2(0, -3f));
+
+                    /*
+                    while (isOccupied(randPosCar, newCar.transform.localPosition.x, newCar.transform.localPosition.y))
+                    {
+                        newCar.transform.Translate(new Vector2(0, -3f));
+                    }*/
+                }
+
+
+
+                /*
+                // OLD RECIPE
+                List<Vector2> toBeSpawnPos = new List<Vector2>();
+                List<float> listTranslate = new List<float>();
+
+                // pour chaque auto que nous voulons spawn
+                for (int i = 0; i < intNbCars; i++)
+                {
+                    randPosCar = Random.Range(0, tabSpawnPos.Length);
+                    Vector2 posCar = tabSpawnPos[randPosCar];
+
+                    GameObject newCar = Instantiate(AICar, posCar, Quaternion.Euler(0f, 0f, rotAngle[randPosCar]), TrainingArea.transform);
+
+                    // pour la premiere auto
+                    if (toBeSpawnPos.Count == 0)
+                    {
+                        toBeSpawnPos.Add(posCar);
+                        // pas fais de translate donc 0
+                        listTranslate.Add(0);
+                    }
+                    else
+                    {
+                        // Regarder ici s'il y a deja une voiture ------------------
+
+                        // Regarde dans toBeSpawn si on a deja spawn a cette position
+                        if (toBeSpawnPos.Where(a => a == posCar).Any())
+                        //Debug.Log(isOccupied(randPosCar, posCar));
+                        //if (isOccupied(randPosCar, posCar))
+                        {
+                            // trouve l'index dans la liste de position 
+                            int index = toBeSpawnPos.LastIndexOf(posCar);
+                            // trouve le dernier translate 
+                            float transValue = listTranslate[index] - 3f;
+                            // on init avec translate et on ajoute la nouvelle position dans la table
+                            newCar.transform.Translate(new Vector2(0, -3f));
+
+                            // Ajoute la position d'origine de l'auto et ajoute la valeur du translate total
+                            toBeSpawnPos.Add(posCar);
+                            listTranslate.Add(transValue);
+                        }
+                        else
+                        {
+                            toBeSpawnPos.Add(posCar);
+                            // pas fais de translate donc 0
+                            listTranslate.Add(0);
+                        }
+                    }*/
+            }
+
+
+
+
+                /*
                 // Si la position ou on veut spawn la voiture est OET, OEB, EOT ou EOB, alors l'orientation de la voiture est horizontale
                 // La position ou la voiture va spawn est le x du spawn point
                 if (randPosCar is 0 or 1 or 3 or 4)
@@ -199,44 +352,14 @@ public class SpawnCars : MonoBehaviour
                     // TESTS
 
                 } while (intNbCarsSpawned < intNbCars);
-
-
-
-
-
-
-                /*
-                float fDecalage = 0;
-                Vector2 posCar = tabSpawnPos[0];
-
-                for (int i = 0; i < 4; i++)
-                {
-                    GameObject newCar = Instantiate(AICar, posCar, Quaternion.Euler(0f, 0f, rotAngle[0]), TrainingArea.transform);
-                    newCar.GetComponent<CarAIHandler>().currentWaypoint = GameObject.Find("wpSpawnOET").GetComponent<WaypointNode>();
-                    newCar.transform.Translate(new Vector2(0f, fDecalage));
-                    fDecalage += 3.2f;
-                }
                 */
 
-                // ------------------- UNTOUCHED
-                int randPos1 = Random.Range(0, tabSpawnPos.Length);
-                if (randPos1 is 2 or 5 or 8)
-                {
-                    randPos1 = Random.Range(0, tabSpawnPos.Length);
 
-                    Vector2 randV1Pos = tabSpawnPos[randPos1];
-                    Instantiate(AICar, randV1Pos, Quaternion.Euler(0f, 0f, rotAngle[randPos1]), TrainingArea.transform);
-                    yield return new WaitForSeconds(Mathf.Lerp(0.5f, 1.5f, Random.value));
-                }
-                else
-                {
-                    Vector2 randV2Pos = tabSpawnPos[randPos1];
-                    Instantiate(AICar, randV2Pos, Quaternion.Euler(0f, 0f, rotAngle[randPos1]), TrainingArea.transform);
-                    yield return new WaitForSeconds(Mathf.Lerp(0.5f, 1.5f, Random.value));
-                }
+
+                yield return new WaitForSeconds(Mathf.Lerp(0.5f, 1.5f, Random.value));
             }
         }
-    }
+
     public void StartGenerator()
     {
         StartCoroutine(CarGenerator());
@@ -255,4 +378,5 @@ public class SpawnCars : MonoBehaviour
     {
         return destroyedCarStopTimer;
     }
+
 }
