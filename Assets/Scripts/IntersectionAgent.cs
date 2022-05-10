@@ -156,9 +156,4 @@ public class IntersectionAgent : Agent
             EndEpisode();
         }
     }
-
-    public void SetCarStopTimer(float timer)
-    {
-        destroyedCarStopTimer += timer;
-    }
 }

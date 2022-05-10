@@ -1,0 +1,56 @@
+{
+    "IntersectionControl": {
+        "checkpoints": [
+            {
+                "steps": 80,
+                "file_path": "results\\TestAvecNouvellesRecompenses\\IntersectionControl\\IntersectionControl-80.onnx",
+                "reward": -56.71090888977051,
+                "creation_time": 1651878915.898422,
+                "auxillary_file_paths": [
+                    "results\\TestAvecNouvellesRecompenses\\IntersectionControl\\IntersectionControl-80.pt"
+                ]
+            },
+            {
+                "steps": 10040,
+                "file_path": "results\\TestAvecNouvellesRecompenses\\IntersectionControl\\IntersectionControl-10040.onnx",
+                "reward": -61.347158773158625,
+                "creation_time": 1651880287.2981024,
+                "auxillary_file_paths": [
+                    "results\\TestAvecNouvellesRecompenses\\IntersectionControl\\IntersectionControl-10040.pt"
+                ]
+            },
+            {
+                "steps": 100040,
+                "file_path": "results\\TestAvecNouvellesRecompenses\\IntersectionControl\\IntersectionControl-100040.onnx",
+                "reward": 25.839652756849926,
+                "creation_time": 1651896379.9053223,
+                "auxillary_file_paths": [
+                    "results\\TestAvecNouvellesRecompenses\\IntersectionControl\\IntersectionControl-100040.pt"
+                ]
+            },
+            {
+                "steps": 345320,
+                "file_path": "results\\TestAvecNouvellesRecompenses\\IntersectionControl\\IntersectionControl-345320.onnx",
+                "reward": 52.05670197804769,
+                "creation_time": 1651935643.2714167,
+                "auxillary_file_paths": [
+                    "results\\TestAvecNouvellesRecompenses\\IntersectionControl\\IntersectionControl-345320.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 345320,
+            "file_path": "results\\TestAvecNouvellesRecompenses\\IntersectionControl.onnx",
+            "reward": 52.05670197804769,
+            "creation_time": 1651935643.2714167,
+            "auxillary_file_paths": [
+                "results\\TestAvecNouvellesRecompenses\\IntersectionControl\\IntersectionControl-345320.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

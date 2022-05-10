@@ -18,7 +18,8 @@ public class CarAIHandler : MonoBehaviour
     [Header("Car LifeTime")]
     public float carLifetime = 0f;
     public float timeStopped = 0f;
-    private bool carHasStopped = false;
+    public int carStoppedTimes = 0;
+    private bool carIsAlreadyStopped = false;
 
     //Local variables
     Vector3 targetPosition = Vector3.zero;
@@ -89,11 +90,20 @@ public class CarAIHandler : MonoBehaviour
 
         carLifetime += Time.deltaTime;
 
-        if (topDownCarController.maxSpeed < 1f || topDownCarController.accelerationInput <= 0.1f)
+        if (topDownCarController.accelerationInput <= 0.1f)
         {
             timeStopped += Time.deltaTime;
-            carHasStopped = true;
-        }   
+        }
+
+/*        // si carIsStopped est false on et que l'auto accelere pas
+        if (topDownCarController.accelerationInput <= 0.1f && carIsStopped == false)
+        {
+            carStoppedTimes++;
+            carIsStopped = true;
+        }
+        // si on se remet a accelerer
+        else if (topDownCarController.accelerationInput > 0.1f && carIsStopped == true)
+            carIsStopped = false;*/
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -103,7 +113,6 @@ public class CarAIHandler : MonoBehaviour
         {
             SetMakeItStop(true);
             transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
-            //Debug.Log("Car hit");
         }
         else
         {
@@ -294,9 +303,12 @@ public class CarAIHandler : MonoBehaviour
 
     private void OnDestroy()
     {
-        agent.SetCarStopTimer(timeStopped);
-        if (!carHasStopped)
+        // Si la voiture arrete moins que 5secondes, on donne 1 point au AI
+        if (timeStopped < 5f)
             agent.AddReward(1);
+        // Si la voiture arrete plus que 5 secondes, on utilise la formule (5 / temps arrete)
+        else 
+            agent.AddReward(5/timeStopped);
     }
 
     public void SetWaypoint(WaypointNode wp)
