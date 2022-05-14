@@ -1,0 +1,29 @@
+{
+    "IntersectionControl": {
+        "checkpoints": [
+            {
+                "steps": 300040,
+                "file_path": "results\\Marco_Train_01\\IntersectionControl\\IntersectionControl-300040.onnx",
+                "reward": -42.45683766161601,
+                "creation_time": 1652235866.9771235,
+                "auxillary_file_paths": [
+                    "results\\Marco_Train_01\\IntersectionControl\\IntersectionControl-300040.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 300040,
+            "file_path": "results\\Marco_Train_01\\IntersectionControl.onnx",
+            "reward": -42.45683766161601,
+            "creation_time": 1652235866.9771235,
+            "auxillary_file_paths": [
+                "results\\Marco_Train_01\\IntersectionControl\\IntersectionControl-300040.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

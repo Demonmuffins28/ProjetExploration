@@ -36,15 +36,24 @@
                 "auxillary_file_paths": [
                     "results\\TestAvecNouvellesRecompenses\\IntersectionControl\\IntersectionControl-345320.pt"
                 ]
+            },
+            {
+                "steps": 347120,
+                "file_path": "results\\TestAvecNouvellesRecompenses\\IntersectionControl\\IntersectionControl-347120.onnx",
+                "reward": 38.398535357581245,
+                "creation_time": 1652209967.3563929,
+                "auxillary_file_paths": [
+                    "results\\TestAvecNouvellesRecompenses\\IntersectionControl\\IntersectionControl-347120.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 345320,
+            "steps": 347120,
             "file_path": "results\\TestAvecNouvellesRecompenses\\IntersectionControl.onnx",
-            "reward": 52.05670197804769,
-            "creation_time": 1651935643.2714167,
+            "reward": 38.398535357581245,
+            "creation_time": 1652209967.3563929,
             "auxillary_file_paths": [
-                "results\\TestAvecNouvellesRecompenses\\IntersectionControl\\IntersectionControl-345320.pt"
+                "results\\TestAvecNouvellesRecompenses\\IntersectionControl\\IntersectionControl-347120.pt"
             ]
         }
     },
