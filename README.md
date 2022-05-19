@@ -13,3 +13,5 @@
  Si il n'y a pas de model dans l'attribut Model:  
   - Dirigez-vous dans le fichier Assets/results/training_luca_1  
   - Faire glisser le model IntersectionControl dans l'attribut de l'Intersections.  
+
+Créé par Marc-Olivier Lalonde et Luca Nakanishi Nadeau
