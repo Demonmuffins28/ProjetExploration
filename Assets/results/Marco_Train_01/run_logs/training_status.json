@@ -9,15 +9,42 @@
                 "auxillary_file_paths": [
                     "results\\Marco_Train_01\\IntersectionControl\\IntersectionControl-300040.pt"
                 ]
+            },
+            {
+                "steps": 499960,
+                "file_path": "results\\Marco_Train_01\\IntersectionControl\\IntersectionControl-499960.onnx",
+                "reward": 34.8917970543816,
+                "creation_time": 1652861683.4143238,
+                "auxillary_file_paths": [
+                    "results\\Marco_Train_01\\IntersectionControl\\IntersectionControl-499960.pt"
+                ]
+            },
+            {
+                "steps": 950040,
+                "file_path": "results\\Marco_Train_01\\IntersectionControl\\IntersectionControl-950040.onnx",
+                "reward": 57.678084303121096,
+                "creation_time": 1652900725.436785,
+                "auxillary_file_paths": [
+                    "results\\Marco_Train_01\\IntersectionControl\\IntersectionControl-950040.pt"
+                ]
+            },
+            {
+                "steps": 988040,
+                "file_path": "results\\Marco_Train_01\\IntersectionControl\\IntersectionControl-988040.onnx",
+                "reward": 49.5435310216511,
+                "creation_time": 1652904042.2758994,
+                "auxillary_file_paths": [
+                    "results\\Marco_Train_01\\IntersectionControl\\IntersectionControl-988040.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 300040,
+            "steps": 988040,
             "file_path": "results\\Marco_Train_01\\IntersectionControl.onnx",
-            "reward": -42.45683766161601,
-            "creation_time": 1652235866.9771235,
+            "reward": 49.5435310216511,
+            "creation_time": 1652904042.2758994,
             "auxillary_file_paths": [
-                "results\\Marco_Train_01\\IntersectionControl\\IntersectionControl-300040.pt"
+                "results\\Marco_Train_01\\IntersectionControl\\IntersectionControl-988040.pt"
             ]
         }
     },

@@ -1,0 +1,56 @@
+{
+    "IntersectionControl": {
+        "checkpoints": [
+            {
+                "steps": 300040,
+                "file_path": "results\\training_luca_1\\IntersectionControl\\IntersectionControl-300040.onnx",
+                "reward": 56.19743645369117,
+                "creation_time": 1652573514.8242962,
+                "auxillary_file_paths": [
+                    "results\\training_luca_1\\IntersectionControl\\IntersectionControl-300040.pt"
+                ]
+            },
+            {
+                "steps": 499960,
+                "file_path": "results\\training_luca_1\\IntersectionControl\\IntersectionControl-499960.onnx",
+                "reward": 43.84032664412544,
+                "creation_time": 1652812717.5462236,
+                "auxillary_file_paths": [
+                    "results\\training_luca_1\\IntersectionControl\\IntersectionControl-499960.pt"
+                ]
+            },
+            {
+                "steps": 999960,
+                "file_path": "results\\training_luca_1\\IntersectionControl\\IntersectionControl-999960.onnx",
+                "reward": 63.39923159859397,
+                "creation_time": 1652843609.47192,
+                "auxillary_file_paths": [
+                    "results\\training_luca_1\\IntersectionControl\\IntersectionControl-999960.pt"
+                ]
+            },
+            {
+                "steps": 1000040,
+                "file_path": "results\\training_luca_1\\IntersectionControl\\IntersectionControl-1000040.onnx",
+                "reward": 63.61610884325845,
+                "creation_time": 1652843612.7139866,
+                "auxillary_file_paths": [
+                    "results\\training_luca_1\\IntersectionControl\\IntersectionControl-1000040.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1000040,
+            "file_path": "results\\training_luca_1\\IntersectionControl.onnx",
+            "reward": 63.61610884325845,
+            "creation_time": 1652843612.7139866,
+            "auxillary_file_paths": [
+                "results\\training_luca_1\\IntersectionControl\\IntersectionControl-1000040.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
