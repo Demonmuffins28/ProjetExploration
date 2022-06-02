@@ -36,15 +36,24 @@
                 "auxillary_file_paths": [
                     "results\\training_luca_1\\IntersectionControl\\IntersectionControl-1000040.pt"
                 ]
+            },
+            {
+                "steps": 1000639,
+                "file_path": "results\\training_luca_1\\IntersectionControl\\IntersectionControl-1000639.onnx",
+                "reward": 53.065486605962114,
+                "creation_time": 1653057418.6740499,
+                "auxillary_file_paths": [
+                    "results\\training_luca_1\\IntersectionControl\\IntersectionControl-1000639.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 1000040,
+            "steps": 1000639,
             "file_path": "results\\training_luca_1\\IntersectionControl.onnx",
-            "reward": 63.61610884325845,
-            "creation_time": 1652843612.7139866,
+            "reward": 53.065486605962114,
+            "creation_time": 1653057418.6740499,
             "auxillary_file_paths": [
-                "results\\training_luca_1\\IntersectionControl\\IntersectionControl-1000040.pt"
+                "results\\training_luca_1\\IntersectionControl\\IntersectionControl-1000639.pt"
             ]
         }
     },

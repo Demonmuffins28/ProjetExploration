@@ -10,35 +10,36 @@ Direct3D:
     VRAM:     8012 MB
     Driver:   30.0.15.1277
 Begin MonoManager ReloadAssembly
-- Completed reload, in  0.148 seconds
+- Completed reload, in  0.134 seconds
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 0.948700 ms
+UnloadTime: 1.081400 ms
 Fewer observations (0) made than vector observation size (500). The observations will be padded.
-Fewer observations (195) made than vector observation size (500). The observations will be padded.
-Fewer observations (312) made than vector observation size (500). The observations will be padded.
+Fewer observations (286) made than vector observation size (500). The observations will be padded.
 Fewer observations (377) made than vector observation size (500). The observations will be padded.
-Fewer observations (442) made than vector observation size (500). The observations will be padded.
+Fewer observations (455) made than vector observation size (500). The observations will be padded.
 More observations (507) made than vector observation size (500). The observations will be truncated.
-More observations (533) made than vector observation size (500). The observations will be truncated.
-More observations (572) made than vector observation size (500). The observations will be truncated.
-More observations (546) made than vector observation size (500). The observations will be truncated.
-More observations (585) made than vector observation size (500). The observations will be truncated.
+More observations (598) made than vector observation size (500). The observations will be truncated.
 More observations (663) made than vector observation size (500). The observations will be truncated.
-More observations (637) made than vector observation size (500). The observations will be truncated.
+More observations (650) made than vector observation size (500). The observations will be truncated.
+More observations (663) made than vector observation size (500). The observations will be truncated.
+More observations (663) made than vector observation size (500). The observations will be truncated.
+More observations (585) made than vector observation size (500). The observations will be truncated.
 More observations (624) made than vector observation size (500). The observations will be truncated.
-More observations (533) made than vector observation size (500). The observations will be truncated.
-More observations (559) made than vector observation size (500). The observations will be truncated.
-More observations (546) made than vector observation size (500). The observations will be truncated.
-More observations (520) made than vector observation size (500). The observations will be truncated.
+More observations (663) made than vector observation size (500). The observations will be truncated.
+More observations (650) made than vector observation size (500). The observations will be truncated.
+More observations (663) made than vector observation size (500). The observations will be truncated.
+More observations (650) made than vector observation size (500). The observations will be truncated.
+More observations (650) made than vector observation size (500). The observations will be truncated.
+Unable to save timers to file D:/Unity Games/ProjetExploration/ProjetExploration_Build/car-ai_Data\ML-Agents\Timers\SampleScene_timers.json
 Setting up 6 worker threads for Enlighten.
 Curl error 42: Callback aborted
 Memory Statistics:
 [ALLOC_TEMP_TLS] TLS Allocator
   StackAllocators : 
     [ALLOC_TEMP_MAIN]
-      Peak usage frame count: [2.0 KB-4.0 KB]: 64 frames, [4.0 KB-8.0 KB]: 11 frames, [8.0 KB-16.0 KB]: 15 frames, [16.0 KB-32.0 KB]: 163 frames, [2.0 MB-4.0 MB]: 1 frames
+      Peak usage frame count: [2.0 KB-4.0 KB]: 49 frames, [4.0 KB-8.0 KB]: 14 frames, [8.0 KB-16.0 KB]: 16 frames, [16.0 KB-32.0 KB]: 160 frames, [2.0 MB-4.0 MB]: 1 frames
       Initial Block Size 4.0 MB
       Current Block Size 4.0 MB
       Peak Allocated Bytes 2.0 MB
@@ -66,7 +67,7 @@ Memory Statistics:
     [ALLOC_TEMP_Job.Worker 0]
       Initial Block Size 256.0 KB
       Current Block Size 256.0 KB
-      Peak Allocated Bytes 0 B
+      Peak Allocated Bytes 16 B
       Overflow Count 0
     [ALLOC_TEMP_Background Job.Worker 10]
       Initial Block Size 32.0 KB
@@ -106,7 +107,7 @@ Memory Statistics:
     [ALLOC_TEMP_Background Job.Worker 12]
       Initial Block Size 32.0 KB
       Current Block Size 32.0 KB
-      Peak Allocated Bytes 54 B
+      Peak Allocated Bytes 66 B
       Overflow Count 0
     [ALLOC_TEMP_EnlightenWorker] x 6
       Initial Block Size 64.0 KB
@@ -116,12 +117,12 @@ Memory Statistics:
     [ALLOC_TEMP_Background Job.Worker 15]
       Initial Block Size 32.0 KB
       Current Block Size 32.0 KB
-      Peak Allocated Bytes 54 B
+      Peak Allocated Bytes 66 B
       Overflow Count 0
     [ALLOC_TEMP_Background Job.Worker 1]
       Initial Block Size 32.0 KB
       Current Block Size 32.0 KB
-      Peak Allocated Bytes 54 B
+      Peak Allocated Bytes 1.5 KB
       Overflow Count 0
     [ALLOC_TEMP_Background Job.Worker 2]
       Initial Block Size 32.0 KB
@@ -171,7 +172,7 @@ Memory Statistics:
     [ALLOC_TEMP_Job.Worker 1]
       Initial Block Size 256.0 KB
       Current Block Size 256.0 KB
-      Peak Allocated Bytes 16 B
+      Peak Allocated Bytes 0 B
       Overflow Count 0
     [ALLOC_TEMP_Job.Worker 2]
       Initial Block Size 256.0 KB
@@ -196,7 +197,7 @@ Memory Statistics:
     [ALLOC_TEMP_Background Job.Worker 0]
       Initial Block Size 32.0 KB
       Current Block Size 32.0 KB
-      Peak Allocated Bytes 1.5 KB
+      Peak Allocated Bytes 66 B
       Overflow Count 0
     [ALLOC_TEMP_CloudJob.Worker 0]
       Initial Block Size 32.0 KB
@@ -214,19 +215,19 @@ Memory Statistics:
       Peak Allocated Bytes 54 B
       Overflow Count 0
 [ALLOC_DEFAULT] Dual Thread Allocator
-  Peak main deferred allocation count 277
+  Peak main deferred allocation count 238
     [ALLOC_BUCKET]
       Large Block size 4.0 MB
       Used Block count 1
       Peak Allocated bytes 0.9 MB
     [ALLOC_DEFAULT_MAIN]
-      Peak usage frame count: [8.0 MB-16.0 MB]: 254 frames
+      Peak usage frame count: [8.0 MB-16.0 MB]: 240 frames
       Requested Block Size 16.0 MB
       Peak Block count 1
       Peak Allocated memory 12.6 MB
       Peak Large allocation bytes 0 B
     [ALLOC_DEFAULT_THREAD]
-      Peak usage frame count: [16.0 MB-32.0 MB]: 254 frames
+      Peak usage frame count: [16.0 MB-32.0 MB]: 240 frames
       Requested Block Size 16.0 MB
       Peak Block count 1
       Peak Allocated memory 20.9 MB
@@ -258,16 +259,16 @@ Memory Statistics:
       Used Block count 1
       Peak Allocated bytes 0.9 MB
     [ALLOC_GFX_MAIN]
-      Peak usage frame count: [32.0 KB-64.0 KB]: 253 frames, [2.0 MB-4.0 MB]: 1 frames
+      Peak usage frame count: [32.0 KB-64.0 KB]: 239 frames, [2.0 MB-4.0 MB]: 1 frames
       Requested Block Size 16.0 MB
       Peak Block count 1
       Peak Allocated memory 2.7 MB
       Peak Large allocation bytes 0 B
     [ALLOC_GFX_THREAD]
-      Peak usage frame count: [64.0 KB-128.0 KB]: 254 frames
+      Peak usage frame count: [64.0 KB-128.0 KB]: 240 frames
       Requested Block Size 16.0 MB
       Peak Block count 1
-      Peak Allocated memory 76.5 KB
+      Peak Allocated memory 76.4 KB
       Peak Large allocation bytes 0 B
 [ALLOC_CACHEOBJECTS] Dual Thread Allocator
   Peak main deferred allocation count 2
@@ -276,13 +277,13 @@ Memory Statistics:
       Used Block count 1
       Peak Allocated bytes 0.9 MB
     [ALLOC_CACHEOBJECTS_MAIN]
-      Peak usage frame count: [0.5 MB-1.0 MB]: 254 frames
+      Peak usage frame count: [0.5 MB-1.0 MB]: 240 frames
       Requested Block Size 4.0 MB
       Peak Block count 1
       Peak Allocated memory 0.9 MB
       Peak Large allocation bytes 0 B
     [ALLOC_CACHEOBJECTS_THREAD]
-      Peak usage frame count: [64.0 KB-128.0 KB]: 253 frames, [256.0 KB-0.5 MB]: 1 frames
+      Peak usage frame count: [64.0 KB-128.0 KB]: 239 frames, [256.0 KB-0.5 MB]: 1 frames
       Requested Block Size 4.0 MB
       Peak Block count 1
       Peak Allocated memory 439.0 KB
@@ -294,13 +295,13 @@ Memory Statistics:
       Used Block count 1
       Peak Allocated bytes 0.9 MB
     [ALLOC_TYPETREE_MAIN]
-      Peak usage frame count: [0-1.0 KB]: 254 frames
+      Peak usage frame count: [0-1.0 KB]: 240 frames
       Requested Block Size 2.0 MB
       Peak Block count 1
       Peak Allocated memory 1.0 KB
       Peak Large allocation bytes 0 B
     [ALLOC_TYPETREE_THREAD]
-      Peak usage frame count: [0-1.0 KB]: 254 frames
+      Peak usage frame count: [0-1.0 KB]: 240 frames
       Requested Block Size 2.0 MB
       Peak Block count 0
       Peak Allocated memory 0 B
